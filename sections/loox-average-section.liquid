@@ -1,0 +1,28 @@
+<div class="looxAverageWidget">
+  <div class="page-width">
+    {% if shop.metafields.loox["global_stats"] %}
+      {% assign looxstats = shop.metafields.loox["global_stats"] | split: ',' %}
+      <div class="homeReview"><span class="looxText exC">Excellent</span>  
+      <span class="loox-rating loox-rating-hp" data-rating="{{ looxstats[0] }}" data-raters="{{ looxstats[1] }}"></span><span class="looxText loox">reviews on <i class="loox-icon loox-star"></i> <b>Loox</b></span> 
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Loox Section",
+  "tag": "section",
+  "class": "section section-collection-list",
+  "settings": [
+
+  ],
+
+  "presets": [
+    {
+      "category": "Loox Section",
+      "name": "Loox Section",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

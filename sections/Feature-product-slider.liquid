@@ -1,0 +1,90 @@
+<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js'></script>
+<div id="featuredproduct" class="{{section.settings.cstm_cls}}">
+  <div class="page-width">
+    {% if section.settings.section-heading !=blank %}
+  <h1 class="heading-title">
+    {{ section.settings.section-heading }}
+  </h1>
+{% endif %}
+    <div class="rslides_container">
+        <ul class="slider" id="slider1">
+            {% assign count = section.settings.number %}
+            {% assign main_collection = collections[section.settings.main_collection] %}
+            {% for product in main_collection.products limit:count  %}
+              <li class="slider__item">
+                  <a href="{{ product.url }}" class="product--media">
+                    <img src="{{  product.featured_image | img_url: '300x' | format: 'jpg' }}" alt="{{ block.settings.slide_heading }}">
+                  </a>            
+                  <h3><a href="{{ product.url }}">{{ product.title }}</a> </h3>
+                  <h4>{{ product.price | money  }}</h4>
+              {% if section.settings.review !=blank %}
+                    <a href="#looxReviews">
+                    <span class="loox-rating" data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}">
+                    </span><span>Reviews</span>
+                	</a
+                {% endif %}
+              </li>
+            {% endfor %} 
+        </ul>
+      {% if section.settings.view_all !=blank %}
+        <a class="view-all button button--primary" href="{{ section.settings.linkbtn }}">{{ section.settings.view_all }}</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Product Slider",
+    "settings": [
+        {
+          "type": "text",
+          "id": "section-heading", 
+          "label": "Header"
+        },
+        {
+            "type": "collection",
+            "id": "main_collection",
+            "label": "Chose Collection to show on slideshow"
+        },
+        {
+        "type": "range",
+        "id": "number",
+        "step": 1,
+        "min": 2,
+        "max": 18,
+        "label": "Range",
+        "default": 3
+      },
+      {
+        "type": "text",
+        "id": "view_all", 
+        "label": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "linkbtn", 
+        "label": "Button link"
+      },
+      {
+        "type": "checkbox",
+        "id": "review", 
+        "label": "Show reviews",
+        "default": false
+      },
+      { 
+
+      "type": "text",
+      "id": "cstm_cls",
+      "label": "Custom css class"
+      }
+      
+    ],
+       "presets": [
+          {
+            "name": "Product Slider"
+          }
+    ]
+  }
+{% endschema %}
+

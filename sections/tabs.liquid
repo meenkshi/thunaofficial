@@ -1,0 +1,308 @@
+<style>
+    .container{
+      max-width: 1280px;
+      margin: 0 auto;
+      height: 100%;
+    }
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    </style>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css'><link rel="stylesheet" href="./style.css">
+
+<!-- partial:index.partial.html -->
+<div class="container">   
+    <!-- Slider main container -->
+    <div class="swiper-container">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>
+            <div class="swiper-slide">Slide 5</div>
+            <div class="swiper-slide">Slide 6</div>
+            <div class="swiper-slide">Slide 7</div>
+            <div class="swiper-slide">Slide 8</div>
+            <div class="swiper-slide">Slide 9</div>
+            <div class="swiper-slide">Slide 10</div>
+        </div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+</div>
+<!-- partial -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js'></script>
+
+<script>
+  $(document).ready(function() {
+// Swiper: Slider
+    new Swiper('.swiper-container', {
+        loop: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        slidesPerView: 3,
+        paginationClickable: true,
+        spaceBetween: 20,
+        breakpoints: {
+            1920: {
+                slidesPerView: 3,
+                spaceBetween: 30
+            },
+            1028: {
+                slidesPerView: 2,
+                spaceBetween: 30
+            },
+            480: {
+                slidesPerView: 1,
+                spaceBetween: 10
+            }
+        }
+    });
+});
+</script>
+{% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<div class="section">
+    <div class="custom-text-section">
+        <h2> {{ section.settings.title_area_text }} </h2>
+      </div>
+<ul class="tabs">
+  {% for block in section.blocks %}
+  {%- assign valuee =forloop.index -%}
+   {% if block.settings.title %}
+    <li><a href="#tab-{{ valuee }}">
+         {{ block.settings.title }}
+      </a></li>
+{% endif %}
+  {% endfor %}
+  </ul>
+  {% for block in section.blocks %}
+  {%- assign value = forloop.index -%}
+  <div id="tab-{{value}}">
+    <div class="parent-class">
+    {{ block.settings.title1 }}
+  {% assign colletionname =   block.settings.title %}
+   {% assign limit =   section.settings.limit %} 
+  
+ {% for product in collections[colletionname].products limit: limit %}
+      <div class="product_info page-width test"> 
+        <a href="{{ product.url }}">
+       <div class="product_image"><img src="{{ product.featured_image | product_img_url: 'large' }}" alt="{{ product.title | escape }}" /></div> 
+        <div class="product_title">{{ product.title | escape }}</div>
+       
+       </a>
+        </div>
+      
+      {% endfor %}
+  </div>
+    </div>
+  {%endfor%}
+	<div class="see_more_btn">
+ <a href="{{ section.settings.link }}">
+    {{ section.settings.linktext }}
+    </a>
+   </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    
+    $('ul.tabs').each(function(){
+      var active, content, links = $(this).find('a');
+      active = $(".tabs li a:first").addClass("is-active");
+      content = $(active.attr('href'));
+      links.not(':first').each(function () {
+        $($(this).attr('href')).hide();
+      });
+      $(this).find('a').click(function(e){
+        active.removeClass('active');
+        content.hide();
+        active = $(this);
+        content = $($(this).attr('href'));
+        active.addClass('active');
+        content.show();
+        return false;
+      });
+    });
+  });
+</script>
+<style>
+ul.tabs {
+  border-bottom: 1px solid #DDDDDD;
+  display: block;
+  margin: 0 0 20px;
+  padding: 0;
+}
+ul.tabs li {
+  display: block;
+  float: left;
+  height: 30px;
+  margin-bottom: 0;
+  padding: 0;
+  width: auto;
+}
+ul.tabs li a {
+  -moz-border-bottom-colors: none;
+  -moz-border-image: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background: none repeat scroll 0 0 #F5F5F5;
+  border-color: #DDDDDD !important;
+  border-style: solid;
+  border-width: 1px 1px 0 1px;
+  display: block;
+  font-size: 13px;
+  height: 29px;
+  line-height: 30px;
+  margin: 0;
+  padding: 0 20px;
+  text-decoration: none;
+  width: auto;
+  color: #303030;
+  border-bottom:none !important;
+}
+ul.tabs li a.active {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border-left-width: 1px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  color: #111111;
+  height: 30px;
+  margin: 0 0 0 -1px;
+  padding-top: 4px;
+  position: relative;
+  top: -4px;
+}
+ul.tabs li:first-child a.active {
+  margin-left: 0;
+}
+ul.tabs li:first-child a {
+  border-top-left-radius: 2px;
+  border-width: 1px 1px 0;
+}
+ul.tabs li:last-child a {
+  border-top-right-radius: 2px;
+}
+ul.tabs:before, ul.tabs:after {
+  content: " ";
+  display: block;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+}
+ul.tabs:after {
+  clear: both;
+}
+</style> {% endcomment %}
+
+{% schema %}
+  {
+    "name": "Collection Tabs",
+    "settings": [
+	{
+        "id": "title_area_text",
+        "type": "text",
+       "label": "Description"
+      },
+{
+  "type": "header",
+  "content": "Heading and Description"
+  },
+ 	{
+            "type": "select",
+            "id": "limit",
+            "label": "Total product",
+            "options": [
+            {
+            "value": "1",
+            "label": "1"
+            },
+            {
+            "value": "2",
+            "label": "2"
+            },
+            {
+            "value": "3",
+            "label": "3"
+            },
+            {
+            "value": "4",
+            "label": "4"
+            },
+            {
+            "value": "5",
+            "label": "5"
+            },
+			{
+            "value": "6",
+            "label": "6"
+            },
+            {
+            "value": "-1",
+            "label": "-1"
+            }
+            ],
+            "default": "6"
+    		},
+{
+      "id": "link",
+      "type": "url",
+      "label": "Link URL"
+    },
+    {
+      "id": "linktext",
+      "type": "text",
+      "label": "Link text",
+      "default": "Click here"
+    }
+],
+"blocks": [
+    {
+      "type": "product_tabs",
+      "name": "Product Tabs",
+      "settings": [
+        {
+          "id": "title",
+          "type": "collection",
+         "label": "Heading"
+        }
+
+    
+      ]
+    }
+
+  ],
+ "presets": [
+    { 
+      "category": "Collection Tabs",
+      "name": "Collection Tabs",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

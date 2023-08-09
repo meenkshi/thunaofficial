@@ -1,0 +1,157 @@
+<style>
+  #tabbyPromo>div{
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 100%;
+      padding: 0;
+      box-sizing: border-box;
+      background: transparent !important;
+      box-shadow: none !important;
+      border-radius: 0;
+      color: #696969;
+      font-size: 14px;
+      line-height: 18px;
+      font-family: inherit;
+      transition: all 0.5s;
+      cursor: pointer;
+        --snippetBorder:none !important;
+  
+  }
+  #tabbyPromo div:empty,.styles__tabby-promo-wrapper--43068 div:empty{
+     display:block !important;
+   }
+   
+  </style>
+
+<div id="tabbyPromo"></div>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+
+<script>
+ 
+    var index = 0;
+function refreshScript (src) {
+  $("#ilkim").html('').remove();
+
+  var scriptElement = document.createElement('script');
+  scriptElement.id="yeniscript"
+  scriptElement.type = 'text/javascript';
+  scriptElement.src = src + '?' + (new Date).getTime();
+  document.getElementsByTagName('head')[0].appendChild(scriptElement);
+}  
+function winLoad(callback) {
+  if (document.readyState === 'complete') {
+    callback();
+  } else {
+    window.addEventListener("load", callback);
+  }
+}
+function getCookie(name) {
+      // Split cookie string and get all individual name=value pairs in an array
+      var cookieArr = document.cookie.split(";");
+      
+      // Loop through the array elements
+      for(var i = 0; i < cookieArr.length; i++) {
+          var cookiePair = cookieArr[i].split("=");
+          
+          /* Removing whitespace at the beginning of the cookie name
+          and compare it with the given string */
+          if(name == cookiePair[0].trim()) {
+              // Decode the cookie value and return
+              return decodeURIComponent(cookiePair[1]);
+          }
+      }
+      
+      // Return null if not found
+      return null;
+  }
+winLoad(function() {
+ var dil = getCookie("bab_explicit");
+  console.log("dilim="+dil)
+  if(dil =="en"){
+    setTimeout(function(){
+    var parabirim =  $(".priceOuter .price-item .money").attr("doubly-currency");
+    console.log("parabirim="+parabirim)
+    if(parabirim == "KWD"){
+        var fiyats = $(".priceOuter .price-item .money").html();
+        console.log("bak="+fiyats);
+        var fiyati = fiyats.trim().replace(",","").split(" ");
+        
+        var fiyat = fiyati[0];
+        
+        if (fiyat > 0 && fiyat < 251) {
+          $("#tabbyPromo").show();
+           new TabbyPromo({
+            selector: '#tabbyPromo', // required, content of Tabby Promo Snippet will be placed in element with that selector
+             source: 'product',
+             currency: 'KWD',
+            price: '' + fiyat + '', // required, price or your product
+            lang: 'EN' // optional, language of snippet and popups, if the property is not set, then it is based on the attribute 'lang' of your html tag
+          });
+        }
+    }
+   
+     var intervalIds = setInterval(function() {
+        if(parabirim !== $(".priceOuter .price-item .money").attr("doubly-currency")){
+            parabirim = $(".priceOuter .price-item .money").attr("doubly-currency");
+       if(parabirim =="KWD"){
+        var fiyats = $(".priceOuter .price-item .money").html();
+        console.log("bak="+fiyats);
+        var fiyati = fiyats.trim().replace(",","").split(" ");
+        var fiyat = fiyati[0];
+        if (fiyat > 0 && fiyat < 251) {
+          $("#tabbyPromo").show();
+           new TabbyPromo({
+            selector: '#tabbyPromo', // required, content of Tabby Promo Snippet will be placed in element with that selector
+             source: 'product',
+             currency: 'KWD',
+            price: '' + fiyat + '', // required, price or your product
+            lang: 'EN' // optional, language of snippet and popups, if the property is not set, then it is based on the attribute 'lang' of your html tag
+          });
+        }
+        }else{
+         $("#tabbyPromo").hide();
+        }
+      } 
+  });
+       }, 1500);
+  }
+ 
+ 
+   var intervalId = setInterval(function() {
+    if (dil !== getCookie("bab_explicit")) {
+      dil = getCookie("bab_explicit");
+      console.log("'selectedlocale' is now defined: " + dil);
+
+      if(dil =="en"){
+        setTimeout(function(){
+        if(parabirim !== $(".priceOuter .price-item .money").attr("doubly-currency")){
+            parabirim = $(".priceOuter .price-item .money").attr("doubly-currency");
+       if(parabirim =="KWD"){
+        var fiyats = $(".priceOuter .price-item .money").html();
+        console.log("bak="+fiyats);
+        var fiyati = fiyats.trim().replace(",","").split(" ");
+        var fiyat = fiyati[0];
+        if (fiyat > 0 && fiyat < 251) {
+          $("#tabbyPromo").show();
+           new TabbyPromo({
+            selector: '#tabbyPromo', // required, content of Tabby Promo Snippet will be placed in element with that selector
+             source: 'product',
+             currency: 'KWD',
+            price: '' + fiyat + '', // required, price or your product
+            lang: 'EN' // optional, language of snippet and popups, if the property is not set, then it is based on the attribute 'lang' of your html tag
+          });
+        }
+        }else{
+         $("#tabbyPromo").hide();
+        }
+      } 
+      }, 1500);
+      }else{
+         $("#tabbyPromo").hide();
+        }
+    }
+   });
+});
+
+</script>
