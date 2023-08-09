@@ -522,6 +522,9 @@ h1.buycontenthd {
     z-index: 99;
     font-size: 18px;
     color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .pop-up-content-wrap .main_content {
@@ -867,7 +870,15 @@ body .section-collection-list .looxAverageWidget .page-width {padding-left: 1.5r
 
 .looxAverageWidget {padding: 7px 0;}
 
-  
+
+}
+
+.card-information .price-item--sale{
+  font-weight:600;
+}
+.card-information .save__amount
+{
+  font-size:12px;
 }
 
 

@@ -10,8 +10,8 @@
     Usage:
     {% render 'facets', results: collection, enable_filtering: true, enable_sorting: true, filter_type: 'vertical' %}
 {% endcomment %}
+<link rel="stylesheet" data-href="{{ 'component-show-more.css' | asset_url }}">
 
-{{ 'component-show-more.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   assign sort_by = results.sort_by | default: results.default_sort_by
